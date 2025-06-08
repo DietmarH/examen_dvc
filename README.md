@@ -1,5 +1,5 @@
-# Examen DVC et Dagshub
-Dans ce dépôt vous trouverez l'architecture proposé pour mettre en place la solution de l'examen. 
+# Examen DVC and Dagshub
+In this repository, you will find the proposed architecture for setting up the exam solution.
 
 ```bash       
 ├── examen_dvc          
@@ -13,8 +13,12 @@ Dans ce dépôt vous trouverez l'architecture proposé pour mettre en place la s
 │   ├── src       
 │   └── README.md.py       
 ```
-N'hésitez pas à rajouter les dossiers ou les fichiers qui vous semblent pertinents.
+First, you need to fork the repository and then clone it to work on it. The final submission for this exam will be the link to your repository on DagsHub. Make sure to add https://dagshub.com/licence.pedago as a collaborator with read-only access so it can be reviewed.
 
-Vous devez dans un premier temps *Fork* le repo et puis le cloner pour travailler dessus. Le rendu de cet examen sera le lien vers votre dépôt sur DagsHub. Faites attention à bien mettre https://dagshub.com/licence.pedago en tant que colaborateur avec des droits de lecture seulement pour que ce soit corrigé.
+You can download the dataset from the following link: https://datascientest-mlops.s3.eu-west-1.amazonaws.com/mlops_dvc_fr/raw.csv.
 
-Vous pouvez télécharger les données à travers le lien suivant : https://datascientest-mlops.s3.eu-west-1.amazonaws.com/mlops_dvc_fr/raw.csv.
+
+# Scripts
+## Raw Data Download Script
+The script `import_raw_data.py` is used to download the raw dataset from a specified URL and save it as
+`raw.csv` in the directory `./data/raw/`. It includes logging for the download process and ensures the output directory exists. To run the script, simply execute it with Python; it will fetch the default dataset and store it in the appropriate location for further processing.
