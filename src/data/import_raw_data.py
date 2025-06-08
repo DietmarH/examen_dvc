@@ -24,7 +24,7 @@ def download_raw_data(url, base_dir):
     logger = logging.getLogger(__name__)
 
     # Define the output directory
-    output_dir = os.path.join(base_dir, 'data', 'raw_data')
+    output_dir = os.path.join(base_dir, 'data', 'raw')
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, 'raw.csv')
