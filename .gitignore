@@ -1,2 +1,3 @@
 /venv
-/clean_data.csv
+/data/processed
+src/data/split_data.py
