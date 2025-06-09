@@ -37,3 +37,140 @@ This script trains a `RandomForestRegressor` model using preprocessed and scaled
 
 ## Model Evaluation Script (`src/models/evaluate.py`)
 This script evaluates a trained `RandomForestRegressor` model using the scaled test dataset. It loads the test features (`X_test_scaled.csv`) and target values (`y_test.csv`) from the `data/processed/` directory, loads the trained model from `models/trained_model.joblib`, and drops any non-numeric columns from the test features to ensure compatibility. The script then generates predictions, calculates evaluation metrics (Mean Squared Error and R² Score), and saves these metrics as `metrics/scores.json`. It also saves the actual and predicted values as `data/predictions.csv`. The script includes robust logging and error handling for traceability and debugging.
+
+# Project Setup Guide
+
+## Setting Up Python, Cloning the Repository, and Creating a Virtual Environment
+
+Follow these steps to prepare your environment for the project:
+
+1. **Update your system and install prerequisites**
+   - Open a terminal and run:
+     ```bash
+     sudo apt update
+     sudo apt install -y software-properties-common
+     ```
+   - This ensures your system is up to date and ready to add new repositories.
+
+2. **Add the Deadsnakes PPA for Python 3.10**
+   - This step allows you to install Python 3.10 on Ubuntu 20.04:
+     ```bash
+     sudo add-apt-repository ppa:deadsnakes/ppa -y
+     sudo apt update
+     ```
+
+3. **Install Python 3.10 and venv**
+   - Install Python 3.10 and the required modules for creating virtual environments:
+     ```bash
+     sudo apt install -y python3.10 python3.10-venv python3.10-dev
+     ```
+
+4. **Verify Python 3.10 Installation**
+   - Check that Python 3.10 is installed:
+     ```bash
+     python3.10 --version
+     ```
+
+5. **Clone the GitHub Repository**
+   - Replace `<your-username>` with your GitHub username if you forked the repo:
+     ```bash
+     git clone --single-branch --branch dh-work https://github.com/<your-username>/examen_dvc.git
+     cd examen_dvc
+     ```
+
+6. **Create and Activate a Virtual Environment**
+   - This keeps your project dependencies isolated:
+     ```bash
+     python3.10 -m venv .venv
+     source .venv/bin/activate
+     ```
+   - You should see your prompt change, indicating the virtual environment is active.
+
+7. **Upgrade pip and Install Required Packages**
+   - Upgrade pip and install all dependencies:
+     ```bash
+     pip install --upgrade pip
+     pip install -r requirements.txt
+     ```
+
+8. **Verify Python and pip Version in the Virtual Environment**
+   - Ensure you are using the correct Python and pip:
+     ```bash
+     python --version
+     pip --version
+     ```
+
+---
+
+## 2. Using DVC for Data and Model Versioning
+
+DVC (Data Version Control) helps you manage large files, data sets, machine learning models, and code all in one place.
+
+1. **Initialize DVC in the Project**
+   - Run:
+     ```bash
+     dvc init
+     ```
+   - This sets up DVC in your project. Commit the changes to git:
+     ```bash
+     git commit -m "Initialize DVC"
+     ```
+
+2. **Set Up DVC Remote Storage**
+   - For this example, we use a local directory as remote storage:
+     ```bash
+     mkdir ../dvc_remote
+     dvc remote add -d remote_storage ../dvc_remote
+     ```
+   - You can use cloud storage (S3, GDrive, etc.) for collaboration.
+
+3. **Remove Data Directory from Git Tracking**
+   - Data files should not be tracked by git, only by DVC:
+     ```bash
+     git rm -r --cached data
+     git commit -m "stop tracking data"
+     ```
+
+4. **Add Data to DVC Tracking**
+   - Track the entire data directory:
+     ```bash
+     dvc add data
+     ```
+
+5. **Commit DVC Changes**
+   - Save the DVC tracking files to git:
+     ```bash
+     git add data.dvc .gitignore .dvc/config
+     git commit -m "Track data with DVC"
+     ```
+
+6. **Push Data to DVC Remote**
+   - Upload your data to the remote storage:
+     ```bash
+     dvc push
+     ```
+
+7. **Import Raw Data and Run the Pipeline**
+   - Download the raw data and process it:
+     ```bash
+     python ./data/import_raw_data.py
+     # Run your data processing scripts as needed
+     ```
+
+8. **Repeat DVC Add/Commit/Push for New Data**
+   - Whenever you add or update data, repeat:
+     ```bash
+     dvc add data
+     dvc commit
+     dvc push
+     git add data.dvc .gitignore
+     git commit -m "Update data"
+     git push origin HEAD:dh-work
+     ```
+
+---
+
+**Tip:**
+- Always activate your virtual environment before running scripts or DVC commands.
+- Use `dvc status` to check if your workspace is in sync with the remote.
+- To deactivate the virtual environment, run `deactivate`.
