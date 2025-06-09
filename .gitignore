@@ -3,3 +3,4 @@
 /models
 data/predictions.csv
 metrics/
+/data
