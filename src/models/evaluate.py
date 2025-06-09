@@ -67,11 +67,11 @@ def evaluate_and_predict_model(base_dir):
         logger.error(f"An unexpected error occurred while loading test data: {e}")
         return
 
-    trained_model_path = os.path.join(models_dir, 'trained_model.joblib')
-    logger.info(f"Attempting to load trained model from: {trained_model_path}")
+    # Load the trained model from gbr_model.pkl instead of trained_model.joblib
+    gbr_model_path = os.path.join(models_dir, 'gbr_model.pkl')
+    logger.info(f"Attempting to load trained model from: {gbr_model_path}")
     try:
-        # Load the trained model
-        model = joblib.load(trained_model_path)
+        model = joblib.load(gbr_model_path)
         logger.info("Trained model loaded successfully.")
     except FileNotFoundError as e:
         logger.error(f"Error loading trained model: {e}. Please ensure the 'Model Training' script has been run.")

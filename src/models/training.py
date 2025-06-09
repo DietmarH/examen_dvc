@@ -96,10 +96,10 @@ def train_model(base_dir):
     # Ensure the models directory exists
     os.makedirs(models_dir, exist_ok=True)
 
-    # Save the trained model
-    trained_model_path = os.path.join(models_dir, 'trained_model.joblib')
-    joblib.dump(model, trained_model_path)
-    logger.info(f"Trained model saved to: {trained_model_path}")
+    # Save the trained model as gbr_model.pkl
+    gbr_model_path = os.path.join(models_dir, 'gbr_model.pkl')
+    joblib.dump(model, gbr_model_path)
+    logger.info(f"Trained model saved to: {gbr_model_path}")
 
 
 if __name__ == "__main__":
