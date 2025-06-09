@@ -13,3 +13,11 @@ scikit-learn==1.3.2
 # scikit-learn-1.3.2
 # scipy-1.10.1
 # threadpoolctl-3.5.0
+
+requests==2.32.2
+# Includes
+# certifi-2025.4.26
+# charset-normalizer-3.4.2
+# idna-3.10
+# requests-2.32.3
+# urllib3-2.4.0
