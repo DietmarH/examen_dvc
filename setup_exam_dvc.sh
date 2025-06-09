@@ -2,7 +2,7 @@
 
 # Install my environment on Ubuntu 20.04
 
-#Ubuntu 20.04 comews with Python 3.8 by default.
+# Ubuntu 20.04 comes with Python 3.8 by default.
 # I want to use Python 3.10
 
 # 1. Update System and Install Prerequisites
@@ -43,15 +43,28 @@ dvc init
 #     Wew use locally storage for this example
 mkdir ../dvc_remote
 
-# 11. Configure DVC remote storage
-dvc remote add -d myremote ../dvc_remote
-
-# 12. Remove all files in the data directory from Git tracking
+# 11. Remove all files in the data directory from Git tracking
 git rm -r --cached data
 git commit -m "stop tracking data"
 
+# 12. Configure DVC remote storage
+dvc remote add -d remote_storage ../dvc_remote
+
 # 13. Add the whole data directory to DVC
 dvc add data
+
+# 14. Commit the changes to DVC
+dvc commit
+
+# 15. Push changes to the remote dvc repository
+dvc push
+
+# 16. Push changes to the git repository
+git add data.dvc .gitignore
+git commit -m "Initial commit with DVC setup"
+git push origin HEAD:dh-work
+
+# 17. Repeat the steps 14 to 16 whenever you add new data files to the data directory
 
 # --- To deactivate the virtual environment, run:
 # deactivate
