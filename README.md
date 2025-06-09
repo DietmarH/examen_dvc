@@ -102,7 +102,7 @@ Follow these steps to prepare your environment for the project:
 
 ---
 
-## 2. Using DVC for Data and Model Versioning
+## Using DVC for Data and Model Versioning
 
 DVC (Data Version Control) helps you manage large files, data sets, machine learning models, and code all in one place.
 
