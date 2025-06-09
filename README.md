@@ -31,3 +31,6 @@ This script loads the training and testing feature datasets (`X_train.csv` and `
 
 ## Hyperparameter Optimization Script (`src/models/find_best_params.py`)
 This script performs hyperparameter optimization for a `RandomForestRegressor` using `GridSearchCV`. It loads the preprocessed and scaled training data (`X_train_scaled.csv` and `y_train.csv`) from the `data/processed/` directory, removes any non-numeric columns from the feature set, and runs a grid search to find the optimal hyperparameters. The best parameters found are saved as a pickle file (`best_params.pkl`) in the `models/` directory. The script uses 3-fold cross-validation and R² scoring, and logs progress and errors for traceability.
+
+## Model Training Script (`src/models/train_model.py`)
+This script trains a `RandomForestRegressor` model using preprocessed and scaled training data. It loads the feature set (`X_train_scaled.csv`) and target values (`y_train.csv`) from the `data/processed/` directory, loads the best hyperparameters from `models/best_params.pkl`, drops any non-numeric columns from the features, and fits the model. The trained model is then saved as `trained_model.joblib` in the `models/` directory. The script includes robust logging and error handling for traceability and reproducibility.
