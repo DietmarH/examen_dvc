@@ -67,7 +67,7 @@ def split_and_save_data(base_dir):
 
 
 if __name__ == "__main__":
-    '# Define the base directory where the script is located'
+    # Define the base directory where the script is located
     # This is typically the root of your project, where the 'data' directory is located.
     # Adjust the path as necessary based on your project structure.
     # Assuming the script is located in src/data/split_data.py, we go two levels up to reach the project root.

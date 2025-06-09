@@ -25,3 +25,6 @@ The script `import_raw_data.py` is used to download the raw dataset from a speci
 
 ## Data Splitting Script
 The script `src/data/split_data.py` is responsible for splitting the raw dataset into training and testing sets. It reads the raw data from `data/raw/raw.csv`, separates the features and the target variable (`silica_concentrate`), and splits the data into training (75%) and testing (25%) sets using a fixed random seed for reproducibility. The resulting datasets (`X_train.csv`, `X_test.csv`, `y_train.csv`, `y_test.csv`) are saved in the `data/processed/` directory. Logging is included to track the process and any errors encountered during execution.
+
+## Data Normalization Script (`src/data/normalize_data.py`)
+This script loads the training and testing feature datasets (`X_train.csv` and `X_test.csv`) from the `data/processed/` directory, applies standard normalization (zero mean, unit variance) to all numeric columns using `StandardScaler` (fitted only on the training set), and saves the normalized datasets as `X_train_scaled.csv` and `X_test_scaled.csv` in the same directory. Non-numeric columns (such as dates or categorical data) are preserved without modification, and the original column order is maintained in the output files. The script logs its progress and errors for easier debugging and reproducibility.
