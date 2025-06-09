@@ -1,3 +1,5 @@
 /.venv
 /data/processed
 /models
+data/predictions.csv
+metrics/
