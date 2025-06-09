@@ -119,7 +119,7 @@ def evaluate_and_predict_model(base_dir):
     os.makedirs(data_output_dir, exist_ok=True)
 
     # Save predictions to a CSV file in the 'data' directory
-    predictions_path = os.path.join(data_output_dir, 'predictions.csv')
+    predictions_path = os.path.join(data_output_dir, 'prediction.cvs')
     predictions_df.to_csv(predictions_path, index=False)
     logger.info(f"Predictions saved to: {predictions_path}")
 
