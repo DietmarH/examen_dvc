@@ -1,10 +1,3 @@
-Hameister Dietmar
-dietmar.hameister@hameister-online.de
-https://dagshub.com/dagshub794/examen_dvc
-
-
-
-
 # Examen DVC and Dagshub
 In this repository you will find the proposed architecture for setting up the exam solution.
 
