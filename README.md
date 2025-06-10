@@ -1,3 +1,10 @@
+Hameister Dietmar
+dietmar.hameister@hameister-online.de
+https://dagshub.com/dagshub794/examen_dvc
+
+
+
+
 # Examen DVC and Dagshub
 In this repository you will find the proposed architecture for setting up the exam solution.
 
@@ -199,7 +206,7 @@ DVC (Data Version Control) helps you manage large files, data sets, machine lear
     -d data/processed/X_test_scaled.csv \
     -d data/processed/y_test.csv \
     -d models/gbr_model.pkl \
-    -o metrics/scores.json \
+    -M metrics/scores.json \
     -o data/prediction.cvs \
     python src/models/evaluate.py
     ```
@@ -212,7 +219,7 @@ DVC (Data Version Control) helps you manage large files, data sets, machine lear
     ```bash
     dvc repro
     ```
-    
+
 4. **Add Data to DVC Tracking**
    - Track the entire data directory:
      ```bash
