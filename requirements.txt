@@ -114,3 +114,5 @@ dvc==3.42.0
 # wcwidth-0.2.13
 # yarl-1.20.0
 # zc.lockfile-3.0.post1
+
+dvc[s3]==3.2.1
