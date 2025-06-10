@@ -131,6 +131,88 @@ DVC (Data Version Control) helps you manage large files, data sets, machine lear
      git commit -m "stop tracking data"
      ```
 
+4. **Create the dvc pipeline**
+    ### Create a reproducible DVC stage for your data splitting step
+    ```bash
+    dvc stage add -n split_data \
+    -d src/data/data_split.py \
+    -d data/raw/raw.csv \
+    -o data/processed/X_train.csv \
+    -o data/processed/X_test.csv \
+    -o data/processed/y_train.csv \
+    -o data/processed/y_test.csv \
+    python src/data/data_split.py
+    ```
+    * -n split_data names the stage.
+    * -d specifies dependencies: the script and the raw data.
+    * -o specifies outputs: the processed train/test splits.
+    * The last part is the command to run the script.
+
+    ### Create a reproducible DVC stage for your normalization step
+    ```bash
+    dvc stage add -n normalize_data \
+    -d src/data/normalize.py \
+    -d data/processed/X_train.csv \
+    -d data/processed/X_test.csv \
+    -o data/processed/X_train_scaled.csv \
+    -o data/processed/X_test_scaled.csv \
+    python src/data/normalize.py
+    ```
+    * -n normalize_data names the stage.
+    * -d specifies dependencies: the normalization script and the input feature files.
+    * -o specifies outputs: the normalized feature files.
+    * The last part is the command to run the script.
+
+    ### Create a reproducible DVC stage for your hyperparameter optimization step
+    ```bash
+    dvc stage add -n grid_search \
+    -d src/models/grid_search.py \
+    -d data/processed/X_train_scaled.csv \
+    -d data/processed/y_train.csv \
+    -o models/best_params.pkl \
+    python src/models/grid_search.py
+    ```
+    * -n grid_search names the stage.
+    * -d specifies dependencies: the normalization script and the input feature files.
+    * -o specifies outputs: the normalized feature files.
+    * The last part is the command to run the script.
+
+    ### Create a reproducible DVC stage for your training step
+    ```bash
+    dvc stage add -n training \
+    -d src/models/training.py \
+    -d data/processed/X_train_scaled.csv \
+    -d data/processed/y_train.csv \
+    -d models/best_params.pkl \
+    -o models/gbr_model.pkl \
+    python src/models/training.py
+    ```
+    * -n training names the stage.
+    * -d specifies dependencies: the normalization script and the input feature files.
+    * -o specifies outputs: the normalized feature files.
+    * The last part is the command to run the script.
+
+    ### Create a reproducible DVC stage for your evaluate step
+    ```bash
+    dvc stage add -n evaluate \
+    -d src/models/evaluate.py \
+    -d data/processed/X_test_scaled.csv \
+    -d data/processed/y_test.csv \
+    -d models/gbr_model.pkl \
+    -o metrics/scores.json \
+    -o data/prediction.cvs \
+    python src/models/evaluate.py
+    ```
+    * -n evaluate names the stage.
+    * -d specifies dependencies: the normalization script and the input feature files.
+    * -o specifies outputs: the normalized feature files.
+    * The last part is the command to run the script.
+
+    ### Run the dvc pipeline
+    ```bash
+    dvc repro
+    ```
+    
 4. **Add Data to DVC Tracking**
    - Track the entire data directory:
      ```bash

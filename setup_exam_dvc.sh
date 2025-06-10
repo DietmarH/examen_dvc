@@ -53,8 +53,16 @@ dvc remote add -d remote_storage ../dvc_remote
 # 13 Import the raw data if necessary
 python ./data/import_raw_data.py
 
-# 14 Run the pipeline to process the data
-TODO: Add the command to run the pipeline, e.g., `dvc repro` or a specific script if needed
+# 14 Create the pipeline to process the data
+dvc stage add -n split_data \
+  -d src/data/data_split.py \
+  -d data/raw/raw.csv \
+  -o data/processed/X_train.csv \
+  -o data/processed/X_test.csv \
+  -o data/processed/y_train.csv \
+  -o data/processed/y_test.csv \
+  python src/data/data_split.py
+  
 
 # 13. Add the whole data directory to DVC
 dvc add data
